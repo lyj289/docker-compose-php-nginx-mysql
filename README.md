@@ -1,5 +1,6 @@
 # php-nginx-mysql-compose
 docker-compose php + nginx + mysql
+安装nginx+php, 并部署自己的blog，一个基于php的MiniBlog, BlogMi
 
 ## 安装docker
 
@@ -29,7 +30,7 @@ docker-compose version 1.19.0, build 1719ceb
 ## git clone本工程
 
 ```
-git clone https://github.com/kkmike999/docker-compose-php-nginx-mysql.git demo
+git clone https://github.com/lyj289/docker-compose-php-nginx-mysql.git demo
 ```
 `demo`为用户自定义目录，可以是任意名称
 
@@ -38,4 +39,29 @@ git clone https://github.com/kkmike999/docker-compose-php-nginx-mysql.git demo
 ```
 cd demo
 docker-compose up -d
+```
+## 进入容器
+
+```
+docker exec -it compose-php /bin/bash
+```
+
+## PHP配置
+php文件的目录，在nginx和php的volume需保持一致.
+如果要增加一个解析php的目录，需要同时在nginx和php的volumes下增加相同项.
+如：
+```
+volumes:
+    - "$PWD/php:/usr/local/etc/php"
+```
+
+### ini配置文件
+/usr/local/etc/php
+
+### fpm配置文件
+/usr/local/etc/php-fpm.d
+
+## 部署blog(php-BlogMi)
+```
+cp blog /var/www/html
 ```

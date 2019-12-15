@@ -1,0 +1,8 @@
+node_modules
+build
+php
+html/demo
+html/github
+html/blog
+*.swp
+.DS_Store
