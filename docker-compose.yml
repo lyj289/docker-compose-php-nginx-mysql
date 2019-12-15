@@ -26,7 +26,7 @@ services:
         ports:
             - "9000:9000"
         volumes:
-            # - "$PWD/html:/var/www/html"
+            - "$PWD/html:/var/www/html"
             - "$PWD/php:/usr/local/etc/php"
             - "/Users/liyujian/www/blog:/var/www/html/blog"
         networks:
