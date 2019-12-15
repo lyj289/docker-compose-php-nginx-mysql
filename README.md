@@ -56,7 +56,7 @@ volumes:
 ```
 
 ### ini配置文件
-/usr/local/etc/php
+目录为`/usr/local/etc/php`, 默认容器内包含两个ini文件，development和production版本，复制想使用的版本，更名为php.ini, 更改其中的配置项，重启容器生效
 
 ### fpm配置文件
 /usr/local/etc/php-fpm.d
