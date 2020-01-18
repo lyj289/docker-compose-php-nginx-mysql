@@ -54,6 +54,49 @@ php文件的目录，在nginx和php的volume需保持一致.
 volumes:
     - "$PWD/php:/usr/local/etc/php"
 ```
+## Restart
+
+> If there are existing containers for a service, and the service's configuration
+> or image was changed after the container's creation, `docker-compose up` picks
+> up the changes by stopping and recreating the containers (preserving mounted
+> volumes).
+
+After php.ini changed, run `docker-compose up -d`, it will not take effect,
+I think the volume file change will not be picked up, while it is mean the `yml` configuration file.
+
+So we can run below cmd, to reforce start the service
+
+```
+# Stop and remove containers, networks, images, and volumes
+docker-compose down
+# Create and start containers
+docker-compose up -d
+
+# Or
+docker-compose restart php
+
+# Or
+docker-compose up -d --force-recreate
+
+```
+
+### re-build
+
+更新php-mysqli下的dockerfile，移除下面语句，不然会有报错
+```
+apt-get install iputils-ping
+```
+最新为
+```
+RUN apt-get update \
+	&& docker-php-ext-install mysqli && docker-php-ext-enable mysqli
+```
+此时，需要移除容器，重新build，否则不会生效
+```
+docker container rm
+docker-compose build php
+docker-compose up -d
+```
 
 ### ini配置文件
 目录为`/usr/local/etc/php`, 默认容器内包含两个ini文件，development和production版本，复制想使用的版本，更名为php.ini, 更改其中的配置项，重启容器生效
@@ -64,4 +107,9 @@ volumes:
 ## 部署blog(php-BlogMi)
 ```
 cp blog /var/www/html
+```
+
+## 查看Log
+```
+docker-compose logs -tf
 ```

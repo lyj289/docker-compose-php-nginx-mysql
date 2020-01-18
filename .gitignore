@@ -1,8 +1,6 @@
 node_modules
 build
 php
-html/demo
-html/github
-html/blog
+html/
 *.swp
 .DS_Store
