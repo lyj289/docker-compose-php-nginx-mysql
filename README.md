@@ -46,6 +46,12 @@ docker-compose up -d
 docker exec -it compose-php /bin/bash
 ```
 
+## Copy文件
+
+```
+docker cp compose-php:/usr/local/etc/php/php.ini-development ./.
+```
+
 ## PHP配置
 php文件的目录，在nginx和php的volume需保持一致.
 如果要增加一个解析php的目录，需要同时在nginx和php的volumes下增加相同项.
