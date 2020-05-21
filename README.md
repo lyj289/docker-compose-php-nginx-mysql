@@ -91,6 +91,9 @@ apt-get install iputils-ping
 RUN apt-get update \
 	&& docker-php-ext-install mysqli && docker-php-ext-enable mysqli
 ```
+
+如果要添加新的扩展，比如pgsql，需要更新上述文件，不必改php.ini
+
 此时，需要移除容器，重新build，否则不会生效
 ```
 docker container rm
